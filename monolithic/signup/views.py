@@ -33,10 +33,10 @@ def signUP(request):
 
 #Redirects to only books based items
 @login_required
-def books(request):
+def Male(request):
     all_users = User.objects.all()
     template = loader.get_template('signup/Home.html')
-    all_items = Items.objects.filter(item_tag="Books")
+    all_items = Items.objects.filter(item_tag="Male")
     print(all_items)
     context = {
         'all_users': all_users,
@@ -47,10 +47,10 @@ def books(request):
 
 #Redirects to only cycle based items
 @login_required
-def cycle(request):
+def Female(request):
     all_users = User.objects.all()
     template = loader.get_template('signup/Home.html')
-    all_items = Items.objects.filter(item_tag="Cycle")
+    all_items = Items.objects.filter(item_tag="Female")
     print(all_items)
     context = {
         'all_users': all_users,
@@ -60,11 +60,10 @@ def cycle(request):
     return render_to_response("signup/Home.html", context)
 
 #Redirects to only Cooler based items
-@login_required
-def cooler(request):
+def lost(request):
     all_users = User.objects.all()
     template = loader.get_template('signup/Home.html')
-    all_items = Items.objects.filter(item_tag="Cooler")
+    all_items = Items.objects.filter(user_name="Shivam")
     print(all_items)
     context = {
         'all_users': all_users,
@@ -72,7 +71,7 @@ def cooler(request):
     }
     p = 0
     return render_to_response("signup/Home.html", context)
-
+    
 #Redirects to Upload.Html page
 @login_required
 def upload(request):
@@ -138,7 +137,6 @@ def add(request):
         userphone = request.POST.get('phonenumber')
         useremail = request.POST.get('email')
         aboutitem = request.POST.get('aboutitem')
-        price = request.POST.get('price')
         tag = request.POST.get('tag')
         image = request.POST.get('image')
 
@@ -146,7 +144,7 @@ def add(request):
 
 
         items = Items.objects.all()
-        Items.objects.create(user_name=username, user_phone=userphone, user_email=useremail, about_item=aboutitem, item_tag=tag, item_price=price, item_image=image)
+        Items.objects.create(user_name=username, user_phone=userphone, user_email=useremail, about_item=aboutitem, item_tag=tag, item_image=image)
         items = Items.objects.all()
         for item in items:
             item.save()
@@ -275,4 +273,16 @@ def signout(request):
 
     return HttpResponse(template.render(context, request))
 
-
+def new_page_vj(request):
+    # return render(request,'signup/newpage.html',{'data1':request.GET['srch-term']})
+    all_users = User.objects.all()
+    template = loader.get_template('signup/Home.html')
+    all_items = Items.objects.filter(user_name=request.GET['srch-term'])
+    print(all_items)
+    context = {
+        'all_users': all_users,
+        'all_items': all_items
+    }
+    p = 0
+    return render_to_response("signup/Home.html", context)
+    

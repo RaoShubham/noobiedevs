@@ -1,6 +1,9 @@
 from sys import path
 
 from django.conf.urls import include, url
+
+from django.urls import path
+
 from . import views
 
 urlpatterns = [
@@ -18,12 +21,13 @@ urlpatterns = [
     url(r'^dash/$', views.item_detail, name='collect'),
     url(r'^dash/upload.html/$', views.upload, name='dash_upload'),
     url('logout/$',views.signout,name='signout'),
-    url('books/$',views.books,name='books'),
-    url('books/upload.html',views.upload,name='upload'),
-    url('cycle/$',views.cycle,name='cycle'),
-    url('cycle/upload.html',views.upload,name='upload'),
-    url('cooler/$',views.cooler,name='cooler'),
-    url('cooler/upload.html',views.upload,name='upload'),
+    url('Male/$',views.Male,name='Male'),
+    url('Male/upload.html',views.upload,name='upload'),
+    url('Female/$',views.Female,name='Female'),
+    url('Female/upload.html',views.upload,name='upload'),
     url('all/$',views.item_detail,name='all'),
     url('all/upload.html',views.upload,name='upload'),
+    url(r'^find_image/$',views.new_page_vj,name='search_function'),
+    url(r'^find_image/upload.html/$',views.upload,name='upload'),
+    # url(r'^lost/$' ,views.lost, name='lost'),
 ]
